@@ -13,9 +13,8 @@ router.post("/", async (req, res) => {
 
 		if (!userInfo.email || !userInfo.password) {
 			res.status(400).json({ "msg": "Not all required fields have been filled" })
-		}
-
-		await User.findOne({ "email": userInfo.email, "password": sha256.x2(userInfo.password) })
+		} else {
+			await User.findOne({ "email": userInfo.email, "password": sha256.x2(userInfo.password) })
 			.then(user => {
 				if(user) {
 					const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "2m"})
@@ -42,6 +41,7 @@ router.post("/", async (req, res) => {
 			.catch(err => {
 				res.status(500).json({ "error": err.message })
 			})
+		}
 	} catch (err) {
 		res.status(500).json({ "error": err.message })
 	}
