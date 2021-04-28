@@ -1,2 +1,2 @@
 # auth-api
-Authentication REST API template built in Node.js and Express using the MongoDB DBMS.
+Universal User Authentication REST API written in Node.js and Express.js using the MongoDB database management system.
